@@ -1,0 +1,21 @@
+header{
+    background-color: #1b3c84;
+    color: white;
+    line-height: 50px;
+    font-family: 'SongTi', Courier, monospace;
+    text-align: center;
+}
+
+footer{
+    background-color: #1b3c84;
+    color: lightgray;
+    line-height: 20px;
+    font-size: 10px;
+    text-align: center;
+
+}
+footer a{
+    color: lightgray;
+    font-size: 12px;
+    text-decoration: none;
+}
