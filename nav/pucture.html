@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片跳转</title>
+
+    <style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.image-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+    background-color: #f0f0f0;
+}
+
+.scroll-image {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.scroll-image:hover {
+    transform: scale(1.1);
+}
+
+.content-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#section1 {
+    background-color: #e0f7fa;
+}
+
+#section2 {
+    background-color: #e8f5e9;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <img src="../img/index_bcc1.png" alt="图片1" class="scroll-image" data-target="section1">
+            <img src="../img/index_bcc2.png" alt="图片2" class="scroll-image" data-target="section2">
+        </div>
+        
+        <div id="section1" class="content-section">
+            <h2>部分1</h2>
+            <p>这是第一个内容部分。</p>
+        </div>
+        
+        <div id="section2" class="content-section">
+            <h2>部分2</h2>
+            <p>这是第二个内容部分。</p>
+        </div>
+    </div>
+
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const scrollImages = document.querySelectorAll('.scroll-image');
+            
+            scrollImages.forEach(image => {
+                image.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>    
+</body>
+</html>
