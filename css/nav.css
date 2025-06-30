@@ -33,7 +33,7 @@ nav ul a{
 
 
 /* 窄屏样式 */
-@media (max-width: 468px) {
+@media (max-width: 700px) {
   .navbar-toggle {
     display: block; /* 显示折叠按钮 */
   }
