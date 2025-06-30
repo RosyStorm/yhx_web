@@ -51,3 +51,10 @@ nav ul a{
     width: 100px;
   }
 }
+
+.underline {
+    border-bottom: 5px solid rgb(167, 166, 238);
+  }
+.underline a{
+    color:rgb(167, 166, 238);
+}
