@@ -12,32 +12,4 @@
    margin: auto;
 }
 
-.personal_info{
-    display: block;
-    background-color: aquamarine;
-    /* height: auto;
-    width: 20%; */
-    position: relative;
-    width: 20%;
-    height: 100vh;
-    padding-top: 20%;
-}
-
-.personal_info .info{
-    background-color: rgb(175, 196, 11);
-    display: block;
-}
-
-.personal_info .info .self_photo{
-    /* width: 50%;
-    height: 50%; */
-    display: block;
-    border-radius: 50%;
-    position: absolute;
-    top: 5%;
-    left: 15%;
-    width: 60%;
-    height: 20%;
-}
-
 

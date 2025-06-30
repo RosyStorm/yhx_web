@@ -1,0 +1,25 @@
+.me{
+    background-color: aqua;
+    width: 25%;
+    height: 100vh;
+    margin-top: 1%;
+}
+
+.me .myphoto{
+    background-color: blue;
+    width: 100%;
+    height: auto;
+}
+
+.myphoto img{
+    background-color: brown;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.me .myinfo{
+    background-color: green;
+    width: 100%;
+    height: auto;
+}
