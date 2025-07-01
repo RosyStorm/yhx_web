@@ -1,25 +1,76 @@
 .me{
-    background-color: aqua;
-    width: 25%;
-    height: 100vh;
+    width: 30%;
     margin-top: 1%;
+    margin-bottom: 10px;
+    display: inline-block;
+    vertical-align: top;
+    /* overflow: hidden; */
 }
 
 .me .myphoto{
-    background-color: blue;
     width: 100%;
     height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
 }
 
 .myphoto img{
-    background-color: brown;
-    width: 100%;
+    width: 60%;
     border-radius: 50%;
     object-fit: cover;
 }
 
 .me .myinfo{
-    background-color: green;
+    /* background-color: green; */
     width: 100%;
     height: auto;
+    margin-top: 15px;
+    text-indent: 1em;
+    /* text-align: center; */
+}
+
+.indexcontent{
+   background-color: rgb(170, 193, 193);
+   display: inline-block;
+   margin-left: 50px;
+   padding-right: 0px;
+   border-radius: 5ch;
+}
+
+
+@media(min-width: 468px) {
+    .me{
+        width: 300px;
+        height: 600px;
+    }
+       .me .myinfo{ 
+       font-size: large;
+       font-family:Arial, Helvetica, sans-serif
+    }
+}
+
+@media(max-width: 468px) {
+    .me{
+        width: 250px;
+        height: 400px;
+    }
+    .me .myinfo{
+       font-size: 12px; 
+    }
+}
+
+@media(min-width: 1100px){
+    .indexcontent{
+        width: 65%;
+        height: 600px;
+    }
+    
+}
+
+@media(max-width: 1100px) {
+    .indexcontent{
+        width: 45%;
+        height: 600px;
+    }
 }
