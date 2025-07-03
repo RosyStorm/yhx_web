@@ -5,6 +5,7 @@
     display: inline-block;
     vertical-align: top;
     /* overflow: hidden; */
+    height: 200vh;
 }
 
 .me .myphoto{
@@ -36,13 +37,14 @@
    margin-left: 50px;
    padding-right: 0px;
    border-radius: 5ch;
+   
 }
 
 
-@media(min-width: 468px) {
+/* @media(min-width: 468px) {
     .me{
         width: 300px;
-        height: 600px;
+        height: 200vh;
     }
        .me .myinfo{ 
        font-size: large;
@@ -52,8 +54,8 @@
 
 @media(max-width: 468px) {
     .me{
-        width: 250px;
-        height: 100vh;
+        width: 200px;
+        height: 200vh;
     }
     .me .myinfo{
        font-size: 12px; 
@@ -63,14 +65,14 @@
 @media(min-width: 1000px){
     .indexcontent{
         width: 65%;
-        height: 100vh;
+        height: 200vh;
     }
     
 }
 
 @media(max-width: 1000px) {
     .indexcontent{
-        width: 80%;
-        height: 100vh;
+        width: 30%;
+        height: 200vh;
     }
-}
+} */

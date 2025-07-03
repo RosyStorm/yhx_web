@@ -1,8 +1,9 @@
 html, body {
-  height: 100%; /* 确保继承高度 */
+  height: 200%; /* 确保继承高度 */
   margin: 0;
   padding: 0;
   overflow-y: auto
+  
 }
 
 body{
@@ -49,6 +50,7 @@ footer{
     font-size: 16px;
     text-align: center;
     padding: 5px 0;
+    margin-top: 1%;
 
 }
 footer a{

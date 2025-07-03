@@ -10,11 +10,21 @@
    font-size: 24px;
    font-weight: bold;
    margin: auto;
-   margin-top: 10px;
+   position: relative;
+   top: 70px;
+   
 }
 
 .indexcontent{
    margin-top: 10px;
+   display: flex;
+   width: 65%;
+   height: 195vh;
+   float: left;
 }
+
+
+
+
 
 

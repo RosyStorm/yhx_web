@@ -1,7 +1,8 @@
 .navbar {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 0px;
   z-index: 1000;
+  width: 100%;
   display: flex;
   background: #4f6d76;
   height: 60px;
@@ -39,7 +40,7 @@ nav ul a{
 
 
 /* 窄屏样式 */
-@media (max-width: 1450px) {
+@media (max-width: 1480px) {
   .navbar-toggle {
     display: block; /* 显示折叠按钮 */
     width: 10%;
