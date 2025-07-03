@@ -15,13 +15,14 @@ header{
 footer{
     background-color: #1b3c84;
     color: lightgray;
-    line-height: 20px;
-    font-size: 10px;
+    line-height: 15px;
+    font-size: 16px;
     text-align: center;
+    padding: 5px 0;
 
 }
 footer a{
     color: lightgray;
-    font-size: 12px;
+    font-size: 20px;
     text-decoration: none;
 }

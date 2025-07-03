@@ -1,0 +1,18 @@
+.info{
+    color: white;
+}
+
+.myinfo{
+    text-decoration: none;
+    color: white;
+}
+
+.myinfo a{
+    text-decoration: none;
+    color: white;
+}
+
+.myinfo a:hover{
+    text-decoration: underline;
+    color: rgb(244, 186, 115);
+}

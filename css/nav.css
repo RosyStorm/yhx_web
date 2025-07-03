@@ -10,13 +10,15 @@
   list-style: none;
 }
 .navbar-toggle {
+  font-size: 40px;
+  color: white;
   display: none; /* 默认隐藏折叠按钮 */
   cursor: pointer;
   height: 60px;
   background-color: #4f6d76;
 }
 .navbar-links li{
-    margin-right: 10px;
+    margin-right: 50px;
     display: inline-block;
 }
 
@@ -33,7 +35,7 @@ nav ul a{
 
 
 /* 窄屏样式 */
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
   .navbar-toggle {
     display: block; /* 显示折叠按钮 */
     width: 10%;
@@ -53,8 +55,29 @@ nav ul a{
 }
 
 .underline {
-    border-bottom: 5px solid rgb(167, 166, 238);
+    text-decoration: underline;
+    text-decoration-color: rgb(244, 186, 115);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px; /* 固定的下划线偏移量 */
   }
 .underline a{
-    color:rgb(167, 166, 238);
+    color:rgb(244, 186, 115);
+}
+
+.glow_text {
+  transition: color 0.5s ease-in-out; /* 平滑过渡效果 */
+}
+
+        /* 当鼠标悬停在文字上时应用的样式 */
+.glow_text:hover {
+    /* text-shadow: X-offset Y-offset Blur-radius Color; */
+    /* X-offset 和 Y-offset 通常设为 0，让发光在文字周围 */
+    /* Blur-radius 控制发光的模糊程度，越大越模糊 */
+    /* Color 是发光的颜色 */
+    color: rgb(244, 186, 115);
+    text-decoration: underline;
+    text-decoration-color: rgb(244, 186, 115); /* 固定的下划线颜色 */
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px; /* 固定的下划线偏移量 */
+    /* 例如，蓝色发光: text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff; */
 }
