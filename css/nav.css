@@ -52,7 +52,7 @@ nav ul a{
     display: block; /* 展开时显示链接 */
     position: absolute;
     font-size: 25px;
-    top: 7%;
+    top: 5vh;
     right: 0;
     height: 100;
     width: 150px;

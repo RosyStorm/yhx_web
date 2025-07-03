@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content">
+  <!-- 初始内容 -->
+</div>
+<button id="loadMore">加载更多</button>
+
+<script>
+  window.addEventListener('scroll', () => {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  if (scrollTop + clientHeight >= scrollHeight - 100) { // 接近底部时加载
+    loadMoreContent(); // 自定义加载函数
+  }
+});
+
+function loadMoreContent() {
+  // 通过AJAX获取新数据并插入DOM
+  console.log('加载更多内容...');
+}
+</script>
+</body>
+</html>

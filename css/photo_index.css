@@ -53,14 +53,14 @@
 @media(max-width: 468px) {
     .me{
         width: 250px;
-        height: 400px;
+        height: 100vh;
     }
     .me .myinfo{
        font-size: 12px; 
     }
 }
 
-@media(min-width: 1100px){
+@media(min-width: 1000px){
     .indexcontent{
         width: 65%;
         height: 100vh;
@@ -68,9 +68,9 @@
     
 }
 
-@media(max-width: 1100px) {
+@media(max-width: 1000px) {
     .indexcontent{
-        width: 100%;
+        width: 80%;
         height: 100vh;
     }
 }
