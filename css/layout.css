@@ -9,7 +9,30 @@ header{
     text-align: center;
     float: right;
     margin-right: 0;
-    width: 40%;
+    width: 60%;
+    overflow: hidden;
+}
+
+.picr{
+    background-color: #1b3c84;
+    color: white;
+    line-height: 60px;
+    text-align: right;
+    float: left;
+    margin-right: 0;
+    width: 60px;
+    overflow: hidden;
+}
+
+.picl{
+    background-color: #1b3c84;
+    color: white;
+    line-height: 60px;
+    text-align: right;
+    float: right;
+    margin-right: 0;
+    width: 60px;
+    overflow: hidden;
 }
 
 footer{
