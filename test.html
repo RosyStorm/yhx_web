@@ -1,28 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <style>
+        /* 禁用缩放 */
+        html, body {
+            overflow: hidden; /* 防止出现滚动条 */
+            -webkit-user-select: none; /* 防止选中文本触发缩放 */
+            -webkit-text-size-adjust: none; /* 禁用iOS文本缩放 */
+            -ms-text-size-adjust: none; /* 禁用IE文本缩放 */
+            touch-action: none; /* 禁用触摸缩放 */
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            width: 100%;
+            height: 60px; /* 固定高度 */
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        /* 内容区域样式 */
+        .content {
+            margin-top: 60px; /* 避开导航栏 */
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div id="content">
-  <!-- 初始内容 -->
-</div>
-<button id="loadMore">加载更多</button>
-
-<script>
-  window.addEventListener('scroll', () => {
-  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-  if (scrollTop + clientHeight >= scrollHeight - 100) { // 接近底部时加载
-    loadMoreContent(); // 自定义加载函数
-  }
-});
-
-function loadMoreContent() {
-  // 通过AJAX获取新数据并插入DOM
-  console.log('加载更多内容...');
-}
-</script>
+    <div class="navbar">导航栏 - 大小固定</div>
+    <div class="content">
+        <p>滚动页面时，导航栏大小不会改变。</p>
+        <p>尝试使用鼠标滚轮，页面不会缩放。</p>
+    </div>
 </body>
 </html>
