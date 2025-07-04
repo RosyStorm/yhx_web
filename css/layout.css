@@ -1,9 +1,8 @@
 html, body {
   height: 200%; /* 确保继承高度 */
   margin: 0;
-  padding: 0;
+  padding-top: 30px ;
   overflow-y: auto
-  
 }
 
 body{
@@ -44,13 +43,14 @@ header{
 }
 
 footer{
+    flex: 1;
     background-color: #1b3c84;
     color: lightgray;
     line-height: 15px;
     font-size: 16px;
     text-align: center;
-    padding: 5px 0;
-    margin-top: 1%;
+    padding: 5px ;
+    margin-top:2%;
 
 }
 footer a{

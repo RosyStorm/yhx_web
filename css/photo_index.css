@@ -2,18 +2,23 @@
     width: 30%;
     margin-top: 1%;
     margin-bottom: 10px;
+    margin-left: 3%;
     display: inline-block;
     vertical-align: top;
     /* overflow: hidden; */
-    height: 200vh;
+    height: 35%;
+    background-color: rgba(44, 48, 112,0.7);
+    border-radius: 5%;
 }
 
 .me .myphoto{
-    width: 100%;
+    width: 70%;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: center;  
+    margin: auto;
+    margin-top: 4%;
 }
 
 .myphoto img{
@@ -26,8 +31,9 @@
     /* background-color: green; */
     width: 100%;
     height: auto;
-    margin-top: 15px;
+    margin-top: 1em;
     text-indent: 1em;
+    font-size: 2vh;
     /* text-align: center; */
 }
 
@@ -38,6 +44,16 @@
    padding-right: 0px;
    border-radius: 5ch;
    
+}
+
+@media(max-width: 500px) {
+    .me .myinfo{
+       font-size: 10px; 
+    }
+
+    .me{
+    height: 15%;
+}
 }
 
 
