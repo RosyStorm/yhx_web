@@ -2,188 +2,757 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>智能留言板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yhx的留言板</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 容器固定高度与滚动优化 */
-        .message-board {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        /* 表单样式优化 */
-        .message-form {
+        
+        body {
+            background: linear-gradient(135deg, #e1ae3f 0%, #2529fc 100%);
+            min-height: 100vh;
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-
-        .form-control {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        /* 留言项交互设计 */
-        .message-item {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-            position: relative;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        /* 折叠功能样式 */
-        .fold-btn {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            cursor: pointer;
-            font-size: 1.2em;
-        }
-
-        /* 删除按钮样式 */
-        .delete-btn {
-            background: #dc3545;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-        }
-
-        /* 动态高度控制 */
-        .content-area {
-            max-height: 100px;
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
         }
-
-        .expanded .content-area {
-            max-height: 300px;
+        
+        header {
+            background: linear-gradient(90deg, #e7cb5e, #8E54E9);
+            color: white;
+            padding: 18px 25px;
+            text-align: center;
+            flex-shrink: 0;
         }
-
-        /* 响应式设计 */
+        
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        header h1 i {
+            font-size: 2rem;
+        }
+        
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .message-form {
+            padding: 20px;
+            background: #f0f3f5;
+            border-bottom: 1px solid #eaeaea;
+            flex-shrink: 0;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            flex: 1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #444;
+            font-size: 14px;
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5eb;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #4776E6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(71, 118, 230, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(90deg, #dfad30, #3a56e3);
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(142, 84, 233, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(142, 84, 233, 0.4);
+        }
+        
+        .message-board {
+            position: relative;
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message-board h2 {
+            color: #555;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.3rem;
+        }
+        
+        .message-count {
+            background: #8E54E9;
+            color: white;
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 13px;
+            font-weight: normal;
+        }
+        
+        .no-messages {
+            text-align: center;
+            padding: 30px 20px;
+            color: #888;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .no-messages i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+        
+        .no-messages h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 5px;
+        }
+        
+        .message {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #8E54E9;
+            animation: fadeIn 0.4s ease-out;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .message:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .message-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4776E6, #8E54E9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #444;
+        }
+        
+        .message-time {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .message-content {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #555;
+            padding: 8px 0 12px;
+        }
+        
+        .message-actions {
+            display: flex;
+            gap: 12px;
+            padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .btn-action {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-action:hover {
+            background: #f5f7ff;
+            color: #4776E6;
+        }
+        
+        .reply-form {
+            margin-top: 12px;
+            padding: 12px;
+            background: #f9f9ff;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .reply-form.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .reply-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e1e5eb;
+            border-radius: 6px;
+            font-size: 14px;
+            min-height: 60px;
+            resize: vertical;
+        }
+        
+        .btn-post-reply {
+            background: #8E54E9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        
+        .btn-post-reply:hover {
+            background: #7a45d0;
+        }
+        
+        .reply {
+            background: #f9f9ff;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            border-left: 3px solid #a78bfa;
+            animation: fadeIn 0.4s ease-out;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .reply-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #a78bfa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        
+        .reply-content {
+            flex: 1;
+        }
+        
+        .reply .author-name {
+            font-size: 14px;
+        }
+        
+        .reply .message-time {
+            font-size: 11px;
+        }
+        
+        .reply .message-content {
+            font-size: 14px;
+            padding: 6px 0 0;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4ade80;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            font-size: 14px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: #f87171;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         @media (max-width: 768px) {
-            .message-form {
+            .container {
+                height: 95vh;
+                border-radius: 12px;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .form-row {
                 flex-direction: column;
+                gap: 10px;
+            }
+            
+            .message-board {
+                padding: 15px;
+            }
+            
+            .message {
+                padding: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="message-board">
-        <h1>智能留言板</h1>
-        <form class="message-form" id="messageForm">
-            <div class="form-control">
-                <input type="text" id="nickname" placeholder="昵称（必填）" required>
-            </div>
-            <div class="form-control">
-                <textarea id="content" placeholder="留言内容（最多200字）" required maxlength="200"></textarea>
-            </div>
-            <button type="submit">发布留言</button>
-        </form>
-        <div id="messageList"></div>
-    </div>
-
-    <script>
-        // 初始化配置
-        const MAX_MESSAGES = 20; // 最大显示数量
-        const STORAGE_KEY = 'message_board';
-        let isFolded = false; // 折叠状态
-
-        // 加载已有留言
-        function loadMessages() {
-            const messages = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            messages.slice(-MAX_MESSAGES).forEach(msg => addMessageToDOM(msg));
-        }
-
-        // 添加消息到DOM
-        function addMessageToDOM(message) {
-            const template = `
-                <div class="message-item">
-                    <div class="header">
-                        <span class="nickname">${message.nickname}</span>
-                        <span class="timestamp">${new Date(message.timestamp).toLocaleString()}</span>
-                        <button class="fold-btn" onclick="toggleFold(this)">△</button>
-                    </div>
-                    <div class="content-area ${message.folded ? 'expanded' : ''}">
-                        ${message.content}
-                    </div>
-                    <button class="delete-btn" onclick="deleteMessage(this)">×</button>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-comment-alt"></i> 留言板</h1>
+            <p>欢迎提问</p>
+        </header>
+        
+        <div class="message-form">
+            <div class="form-row">
+                <div class="form-group" style="flex: 0.4;">
+                    <label for="name">昵称</label>
+                    <input type="text" id="name" placeholder="您的昵称">
                 </div>
-            `;
+                <div class="form-group" style="flex: 0.6;">
+                    <label for="message">留言内容</label>
+                    <input type="text" id="message" placeholder="输入留言内容...">
+                </div>
+            </div>
+            <button class="btn-submit" id="submitBtn">
+                <i class="fas fa-paper-plane"></i> 发布留言
+            </button>
+        </div>
+        
+        <div class="message-board">
+            <h2>留言列表 <span class="message-count" id="messageCount">0/30</span></h2>
+            <div class="messages-container" id="messagesContainer">
+                <!-- 留言将通过JavaScript动态添加 -->
+                <div class="message">
+                    <div class="message-header">
+                        <div class="message-author">
+                            <div class="avatar">D</div>
+                            <div class="author-info">
+                                <div class="author-name">设计示例</div>
+                                <div class="message-time">2023-11-15 10:30</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        这是一个留言示例，展示了留言板的布局和样式。精简设计使留言区域更大，阅读更舒适。
+                    </div>
+                    <div class="message-actions">
+                        <button class="btn-action">
+                            <i class="fas fa-reply"></i> 回复
+                        </button>
+                        <button class="btn-action">
+                            <i class="fas fa-trash-alt"></i> 删除
+                        </button>
+                    </div>
+                    
+                    <div class="reply">
+                        <div class="reply-avatar">A</div>
+                        <div class="reply-content">
+                            <div class="message-header">
+                                <div class="message-author">
+                                    <div class="author-name">管理员回复</div>
+                                    <div class="message-time">2023-11-15 11:15</div>
+                                </div>
+                            </div>
+                            <div class="message-content">
+                                这是一个回复示例，展示了回复的样式和布局。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="message">
+                    <div class="message-header">
+                        <div class="message-author">
+                            <div class="avatar">U</div>
+                            <div class="author-info">
+                                <div class="author-name">用户体验</div>
+                                <div class="message-time">2023-11-14 16:45</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        这个留言板的设计非常注重空间利用率，增大了留言显示区域，使阅读体验更佳。同时保持了美观的视觉设计。
+                    </div>
+                    <div class="message-actions">
+                        <button class="btn-action">
+                            <i class="fas fa-reply"></i> 回复
+                        </button>
+                        <button class="btn-action">
+                            <i class="fas fa-trash-alt"></i> 删除
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">留言已保存！</span>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const nameInput = document.getElementById('name');
+            const messageInput = document.getElementById('message');
+            const submitBtn = document.getElementById('submitBtn');
+            const messagesContainer = document.getElementById('messagesContainer');
+            const messageCount = document.getElementById('messageCount');
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
             
-            const messageList = document.getElementById('messageList');
-            messageList.insertAdjacentHTML('afterbegin', template);
-            adjustScroll();
-        }
-
-        // 智能滚动控制
-        function adjustScroll() {
-            const container = document.getElementById('messageList');
-            container.scrollTop = container.scrollHeight;
-        }
-
-        // 折叠功能
-        window.toggleFold = function(btn) {
-            const content = btn.closest('.message-item').querySelector('.content-area');
-            content.classList.toggle('expanded');
-            btn.textContent = content.classList.contains('expanded') ? '△' : '▽';
-        }
-
-        // 删除操作
-        window.deleteMessage = function(btn) {
-            const message = btn.closest('.message-item');
-            message.remove();
-            updateStorage();
-        }
-
-        // 表单处理
-        document.getElementById('messageForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const nickname = document.getElementById('nickname').value.trim();
-            const content = document.getElementById('content').value.trim();
+            // 留言数组
+            let messages = JSON.parse(localStorage.getItem('messages')) || [];
+            const MAX_MESSAGES = 1000;
             
-            if (!nickname || !content) return;
-
-            const newMessage = {
-                nickname,
-                content,
-                timestamp: Date.now(),
-                folded: true // 默认折叠
-            };
-
-            // 更新DOM
-            addMessageToDOM(newMessage);
+            // 显示通知
+            function showNotification(text, isError = false) {
+                notificationText.textContent = text;
+                notification.className = 'notification';
+                notification.classList.add(isError ? 'error' : 'show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
             
-            // 更新存储
-            const messages = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            messages.push(newMessage);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_MESSAGES)));
+            // 生成随机头像
+            function generateAvatar(name) {
+                return name.charAt(0).toUpperCase();
+            }
             
-            // 重置表单
-            e.target.reset();
+            // 格式化时间
+            function formatTime(date) {
+                return new Date(date).toLocaleString('zh-CN', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+            
+            // 渲染留言
+            function renderMessages() {
+                messagesContainer.innerHTML = '';
+                
+                if (messages.length === 0) {
+                    messagesContainer.innerHTML = `
+                        <div class="no-messages">
+                            <i class="fas fa-comment-slash"></i>
+                            <h3>暂无留言</h3>
+                            <p>成为第一个留言的人吧！</p>
+                        </div>
+                    `;
+                    messageCount.textContent = `0/${MAX_MESSAGES}`;
+                    return;
+                }
+                
+                messageCount.textContent = `${messages.length}/${MAX_MESSAGES}`;
+                
+                messages.slice().reverse().forEach((msg, index) => {
+                    const messageEl = document.createElement('div');
+                    messageEl.className = 'message';
+                    messageEl.dataset.id = msg.id;
+                    
+                    messageEl.innerHTML = `
+                        <div class="message-header">
+                            <div class="message-author">
+                                <div class="avatar">${generateAvatar(msg.name)}</div>
+                                <div class="author-info">
+                                    <div class="author-name">${msg.name}</div>
+                                    <div class="message-time">${formatTime(msg.time)}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-content">${msg.content}</div>
+                        <div class="message-actions">
+                            <button class="btn-action btn-reply">
+                                <i class="fas fa-reply"></i> 回复
+                            </button>
+                            <button class="btn-action btn-delete">
+                                <i class="fas fa-trash-alt"></i> 删除
+                            </button>
+                        </div>
+                        <div class="reply-form" id="replyForm-${msg.id}">
+                            <textarea class="reply-input" placeholder="输入回复内容..."></textarea>
+                            <button class="btn-post-reply">发布回复</button>
+                        </div>
+                        ${msg.replies && msg.replies.length > 0 ? 
+                            msg.replies.map(reply => `
+                                <div class="reply">
+                                    <div class="reply-avatar">${generateAvatar(reply.name)}</div>
+                                    <div class="reply-content">
+                                        <div class="message-header">
+                                            <div class="message-author">
+                                                <div class="author-name">${reply.name}</div>
+                                                <div class="message-time">${formatTime(reply.time)}</div>
+                                            </div>
+                                        </div>
+                                        <div class="message-content">${reply.content}</div>
+                                    </div>
+                                </div>
+                            `).join('') : ''
+                        }
+                    `;
+                    
+                    messagesContainer.appendChild(messageEl);
+                });
+                
+                // 添加事件监听器
+                document.querySelectorAll('.btn-delete').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const messageEl = this.closest('.message');
+                        const messageId = messageEl.dataset.id;
+                        deleteMessage(messageId);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-reply').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const messageEl = this.closest('.message');
+                        const replyForm = messageEl.querySelector('.reply-form');
+                        replyForm.classList.toggle('active');
+                    });
+                });
+                
+                document.querySelectorAll('.btn-post-reply').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const messageEl = this.closest('.message');
+                        const messageId = messageEl.dataset.id;
+                        const replyInput = messageEl.querySelector('.reply-input');
+                        const replyContent = replyInput.value.trim();
+                        
+                        if (replyContent) {
+                            addReply(messageId, replyContent);
+                            replyInput.value = '';
+                        } else {
+                            showNotification('回复内容不能为空', true);
+                        }
+                    });
+                });
+            }
+            
+            // 添加新留言
+            function addMessage() {
+                const name = nameInput.value.trim();
+                const content = messageInput.value.trim();
+                
+                if (!name || !content) {
+                    showNotification('昵称和留言内容不能为空', true);
+                    return;
+                }
+                
+                if (messages.length >= MAX_MESSAGES) {
+                    showNotification(`留言数量已达上限 (${MAX_MESSAGES}条)`, true);
+                    return;
+                }
+                
+                const newMessage = {
+                    id: Date.now(),
+                    name: name,
+                    content: content,
+                    time: new Date().toISOString(),
+                    replies: []
+                };
+                
+                messages.push(newMessage);
+                saveMessages();
+                renderMessages();
+                
+                nameInput.value = '';
+                messageInput.value = '';
+                
+                showNotification('留言已发布！');
+            }
+            
+            // 添加回复
+            function addReply(messageId, content) {
+                const name = "访客"; // 简化回复功能，实际应用中应获取用户信息
+                
+                const reply = {
+                    id: Date.now(),
+                    name: name,
+                    content: content,
+                    time: new Date().toISOString()
+                };
+                
+                messages = messages.map(msg => {
+                    if (msg.id == messageId) {
+                        if (!msg.replies) msg.replies = [];
+                        msg.replies.push(reply);
+                    }
+                    return msg;
+                });
+                
+                saveMessages();
+                renderMessages();
+                showNotification('回复已发布！');
+            }
+            
+            // 删除留言
+            function deleteMessage(messageId) {
+                if (confirm('确定要删除这条留言吗？')) {
+                    messages = messages.filter(msg => msg.id != messageId);
+                    saveMessages();
+                    renderMessages();
+                    showNotification('留言已删除');
+                }
+            }
+            
+            // 保存留言到本地存储
+            function saveMessages() {
+                localStorage.setItem('messages', JSON.stringify(messages));
+            }
+            
+            // 初始化
+            renderMessages();
+            
+            // 事件监听
+            submitBtn.addEventListener('click', addMessage);
+            
+            // 按Enter键提交留言
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    addMessage();
+                }
+            });
+            
+            // 自动保存功能（每30秒保存一次）
+            setInterval(() => {
+                saveMessages();
+            }, 30000);
         });
-
-        // 存储管理
-        function updateStorage() {
-            const messages = Array.from(document.querySelectorAll('.message-item')).map(item => ({
-                nickname: item.querySelector('.nickname').textContent,
-                content: item.querySelector('.content-area').textContent,
-                timestamp: new Date(item.querySelector('.timestamp').textContent).getTime(),
-                folded: item.querySelector('.content-area').classList.contains('expanded')
-            }));
-            
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_MESSAGES)));
-        }
-
-        // 初始化
-        loadMessages();
     </script>
 </body>
 </html>
