@@ -19,7 +19,7 @@ def convert_md_to_html(md_file_path, html_file_path):
         file.write(html_content)
 
 # 使用示例
-file = 'experience'
+file = 'table'
 md_file = './md/'+ file+'.md'  # 你的Markdown文件路径
 html_file = './md2html/'+ file+'.html'  # 输出的HTML文件路径
 convert_md_to_html(md_file, html_file)

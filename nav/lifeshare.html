@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人经历</title>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/leavemsg.css">
 
     <script src = "../js/buttom.js"></script>
 </head>
@@ -24,6 +25,27 @@
         </header>
     <button class="navbar-toggle" onclick="toggleNavbar()" onmouseleave="loggleNavbar">&#9776;</button>    </nav>
     
+    <div class="main">
+       <div class="cont">
+            <div class="message-form">
+                <h2>发表留言</h2>
+                <form id="messageForm">
+                    <input type="text" id="name" name="name" placeholder="你的名字" required>
+                    <textarea id="message" name="message" placeholder="你的留言" required></textarea>
+                    <button type="submit">提交</button>
+                </form>
+            </div>
+            <div class="message-list">
+                <h2>留言列表</h2>
+                <ul id="messages"></ul>
+            </div>
+        </div>
+        <script src="../js/leavemsg.js"></script>
+
+        <div class="lifeshare">hello，欢迎来到颜浩轩的生活分享区！</div>
+        <div class="divide">分类区间</div>
+    </div>
+
     
     <footer>
         颜浩轩
