@@ -7,8 +7,11 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/sports.css">
 
     <script src = "../js/buttom.js"></script>
+    <script src="../js/picture.js"></script>
+
 </head>
 <body>
     <nav class="navbar">
@@ -25,17 +28,69 @@
         <button class="navbar-toggle" onclick="toggleNavbar()" onmouseleave="loggleNavbar">&#9776;</button>
     </nav>
     
-    <div class="yhx">我叫颜浩轩</div>
-       
-    <h1>体育专区</h1>
+    <div class="container">
+        <div class="image">
+            <div class="image-section">
+                <img src="../img/index_bcc1.png" alt="图片1" class="scroll-image" data-target="section1">
+                <img src="../img/index_bcc2.png" alt="图片2" class="scroll-image" data-target="section2">
+                <img src="../img/index_bcc2.png" alt="图片2" class="scroll-image" data-target="section3">
+                <img src="../img/index_bcc1.png" alt="图片1" class="scroll-image" data-target="section1">
+                <img src="../img/index_bcc2.png" alt="图片2" class="scroll-image" data-target="section2">
+                <img src="../img/index_bcc2.png" alt="图片2" class="scroll-image" data-target="section3">
+                
+            </div>
+            
+            <div class="image-section">
+                <img src="../img/index_bcc1.png" alt="图片1" class="scroll-image" data-target="section1">
+                <img src="../img/index_bcc2.png" alt="图片2" class="scroll-image" data-target="section2">
+                <img src="../img/index_bcc2.png" alt="图片2" class="scroll-image" data-target="section3">
 
-     <footer>
+            </div>
+
+            <div class="image-section">
+                <img src="../img/index_bcc1.png" alt="图片1" class="scroll-image" data-target="section1">
+                <img src="../img/index_bcc2.png" alt="图片2" class="scroll-image" data-target="section2">
+                <img src="../img/index_bcc2.png" alt="图片2" class="scroll-image" data-target="section3">
+            </div>
+            
+        </div>
+
+
+
+        <div class="discription">
+            <div id="section1" class="content-section">
+                <h2>部分1</h2>
+                <p>这是第一个内容部分。</p>
+            </div>
+            
+            <div id="section2" class="content-section">
+                <h2>部分2</h2>
+                <p>这是第二个内容部分。</p>
+            </div>
+
+            <div id="section" class="content-section">
+                <h2>部分3</h2>
+                <p>这是第二个内容部分。</p>
+            </div>
+        </div>
+    
+    </div>
+
+
+     <footer style="position: fixed; bottom: 0; width: 100%;;">
         颜浩轩
         <a href="https://github.com/RosyStorm/yhx_web" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
             <i class="fab fa-github"></i> 
         </a>
         仓库
+        &nbsp&nbsp
+        邮箱
+        <a href="mailto:example@example.com">
+            <i class="fas fa-envelope icon"></i>
+        </a>
+        1741426978@qq.com
     </footer>
 
+    <button class="back-to-top" ><a href="./sports.html">back</a></button>
 </body>
 </html>
