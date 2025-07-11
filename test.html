@@ -1,275 +1,47 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>回到顶部实现</title>
-    <style>
-        /* 回到顶部按钮样式 */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 
-                transform 0.3s ease,
-                background-color 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-        }
+<style>
+/* 响应式容器 */
+.container {
+    display: flex;
+    gap: 1rem;
+}
 
-        .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
+/* 左侧按钮优化 */
+.show {
+    background: #f0f0f0;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
 
-        .back-to-top:hover {
-            background: rgba(0, 0, 0, 0.9);
-            transform: translateY(-3px);
-        }
+/* 主内容区 */
+.box2 {
+    flex: 1;
+    background: #7d41e6;
+    padding: 1rem;
+    line-height: 1.6;
+    color: white;
+    overflow-x: hidden; /* 防止水平滚动 */
+}
 
-        .back-to-top::after {
-            content: "↑";
-            font-size: 24px;
-            color: white;
-            font-weight: bold;
-            animation: pulse 1.5s infinite ease-in-out;
-        }
+/* 智能换行方案 */
+.box2 {
+    word-break: break-word; /* 强制单词换行 */
+    hyphens: auto; /* 自动连字符（需现代浏览器） */
+    white-space: normal; /* 恢复自然换行 */
+}
 
-        /* 脉冲动画 */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
+/* 文本容器优化 */
+.box2 > * {
+    margin: 0.5rem 0; /* 统一元素间距 */
+}
+</style>
 
-        /* 页面滚动效果 */
-        body {
-            scroll-behavior: smooth;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
-</head>
-<body>
-    <!-- 页面内容 -->
-    <div class="content">
-        <!-- 你的页面内容 -->
-        <h1>长内容示例</h1>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>        
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>        
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>        
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>        
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>        
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>                
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>        
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <p>这里是很多很多内容...</p>
-        <!-- 更多内容 -->
+<!-- 结构优化 -->
+<div class="container">
+    <button class="show" onclick="toggleNavbar2()">></button>
+    <div class="box2">
+        <h4>网站搭建中请大家耐心等待!</h4>
+        <p>网站搭建中请大家耐心等待</p>
+        <p>网站搭建中请大家耐心等待FFFFFFFFFFFFFFFFFFFFFFFFFFFFFv这地方v可能地方v九六年至v恐惧在南方vi大力女子是的v哦覅v都在v那么多佛i不放过v就偶的覅不在南京FFFFFFFFFFFFFFFFFFFeeeeeeeeeeeeeeeeeeeFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</p>
+        <p>网站搭建中请大家耐心等待</p>
     </div>
-
-    <!-- 回到顶部按钮 -->
-    <button class="back-to-top" id="scrollTopBtn"></button>
-
-    <script>
-        // 按钮显示逻辑
-        const scrollTopBtn = document.getElementById('scrollTopBtn');
-        
-        // 滚动事件监听
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollPosition > 300) {
-                scrollTopBtn.classList.add('show');
-            } else {
-                scrollTopBtn.classList.remove('show');
-            }
-        });
-
-        // 点击回滚
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // 触发点击事件（可选）
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 't' || e.key === 'T') {
-                e.preventDefault();
-                scrollTopBtn.click();
-            }
-        });
-
-        // 进阶功能：滚动进度条
-        function updateScrollIndicator() {
-            const progress = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            document.documentElement.style.setProperty('--scroll-progress', `${progress}%`);
-        }
-
-        // 添加滚动进度条样式
-        const style = document.createElement('style');
-        style.textContent = `
-            :root {
-                --scroll-progress: 0%;
-            }
-            
-            .progress-indicator {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 4px;
-                background: rgba(255, 255, 255, 0.1);
-                z-index: 999;
-            }
-            
-            .progress-indicator::after {
-                content: '';
-                position: absolute;
-                height: 100%;
-                width: var(--scroll-progress);
-                background: linear-gradient(
-                    to right,
-                    #4CAF50,
-                    #45a049
-                );
-                transition: width 0.1s ease;
-            }
-        `;
-        document.head.appendChild(style);
-
-        // 创建进度条元素
-        const progressBar = document.createElement('div');
-        progressBar.className = 'progress-indicator';
-        document.body.appendChild(progressBar);
-
-        // 更新进度条
-        window.addEventListener('scroll', updateScrollIndicator);
-        window.addEventListener('resize', updateScrollIndicator);
-    </script>
-</body>
-</html>
+</div>

@@ -2,7 +2,7 @@ html, body {
   height: 100%; /* 确保继承高度 */
   margin: 0;
   padding-top: 30px ;
-  overflow-y: auto
+  overflow-y: none;
 }
 
 body{
