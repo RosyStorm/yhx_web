@@ -27,7 +27,6 @@
    /* white-space: pre-wrap; */
    line-height: 10px; 
    text-align: left;
-
    word-break: break-word; /* 强制单词换行 */
    hyphens: auto; /* 自动连字符（需现代浏览器） */
    white-space: normal; /* 恢复自然换行 */
